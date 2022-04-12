@@ -18,7 +18,7 @@ const Navbar = ()=>{
     return (
         <>
         <Box>
-            <AppBar sx={{position:'initial'}} className={classes.navbar}>
+            <AppBar className={classes.navbar}>
                 <Toolbar></Toolbar>
             </AppBar>
         </Box>
