@@ -1,8 +1,8 @@
-name:string,
+    name:string,
     bio:string,
     experience:string,
+    education:string,
     skills:string[],
     languages:string[],
     contacts:string[],
-    education:string,
     projects:porjectInterface[]
