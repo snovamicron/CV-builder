@@ -20,6 +20,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
 
+// API
+import { send_template_1_data } from '../../../services/allApi';
+
 
 const Template_1 = () => {
     interface porjectInterface {
@@ -63,6 +66,7 @@ const Template_1 = () => {
     })
     const [lists, setLists] = useState<listsInterface>({ skills: false, languages: false, contacts: false, projects: false })
     const [listData, setListData] = useState<listsDataInterface>({ skillsList: '', languagesList: '', contactsList: '' })
+    const [show, setShow] = useState<boolean>(false)
     const onDataChange = (e: any): void => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
@@ -130,6 +134,10 @@ const Template_1 = () => {
                 setFormData({ ...formData })
                 break;
         }
+    }
+    const onAllDataSubmit = async ():Promise<void> => {
+        await send_template_1_data(formData)
+        setShow(true)
     }
     const theme = useTheme()
     const matches = useMediaQuery(theme.breakpoints.up('md'))
@@ -323,12 +331,22 @@ const Template_1 = () => {
                                 </Box>
                             </Grid>
                         </Grid>
+                        <Button 
+                        variant='outlined'
+                        onClick={onAllDataSubmit}
+                        >
+                            submit
+                        </Button>
                     </Box>
                 </Grid>
                 {
                     matches &&
                     <Grid item xs={12} md={5}>
-                        <Box className={classes.components}>prevew</Box>
+                        <Box className={classes.components}>
+                            {
+                                show && <iframe style={{width:'100%', height:'100%'}} src='http://localhost:4000/cv/template_1'/>
+                            }
+                        </Box>
                     </Grid>
                 }
             </Grid>
