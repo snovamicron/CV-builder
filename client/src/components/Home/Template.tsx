@@ -12,7 +12,6 @@ import { makeStyles } from '@mui/styles'
 const Template = () => {
 const useStyles = makeStyles({
   wraper:{
-    border:'2px solid #000',
       height:'92vh',
       marginTop:64
   }

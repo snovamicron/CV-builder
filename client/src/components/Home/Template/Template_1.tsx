@@ -8,9 +8,15 @@ import {
     TextField,
     TextareaAutosize,
     Button,
-    Chip
+    Chip,
+    Card,
+    CardHeader,
+    CardContent,
+    Typography,
+    IconButton
 } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
 
@@ -33,7 +39,8 @@ const Template_1 = () => {
     interface listsInterface {
         skills: boolean,
         languages: boolean,
-        contacts: boolean
+        contacts: boolean,
+        projects: boolean
     }
     interface listsDataInterface {
         skillsList: string,
@@ -49,18 +56,22 @@ const Template_1 = () => {
         languages: [],
         contacts: [],
         projects: []
-    })  
-    const [lists, setLists] = useState<listsInterface>({ skills: false, languages: false, contacts: false })
+    })
+    const [projects, setProjects] = useState<porjectInterface>({
+        porjectName: [''],
+        porjectDescription: ''
+    })
+    const [lists, setLists] = useState<listsInterface>({ skills: false, languages: false, contacts: false, projects: false })
     const [listData, setListData] = useState<listsDataInterface>({ skillsList: '', languagesList: '', contactsList: '' })
     const onDataChange = (e: any): void => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
-    const onListTextChange = (e:any):void => {
-        setListData({...listData, [e.target.name]:e.target.value})
+    const onListTextChange = (e: any): void => {
+        setListData({ ...listData, [e.target.name]: e.target.value })
     }
     const onListDataChange = (e: any): void => {
-        if(e.key === 'Enter'){
-            setListData({...listData, [e.target.name]:''})
+        if (e.key === 'Enter') {
+            setListData({ ...listData, [e.target.name]: '' })
             switch (e.target.name) {
                 case 'skillsList':
                     setFormData({ ...formData, skills: [...formData.skills, e.target.value] })
@@ -71,32 +82,45 @@ const Template_1 = () => {
                 case 'contactsList':
                     setFormData({ ...formData, contacts: [...formData.contacts, e.target.value] })
                     break;
-    
+
                 default:
                     setFormData({ ...formData })
                     break;
             }
         }
     }
+    const onProjectsDataChange = (): void => {
+        if (formData.projects.length < 4) {
+            setFormData({ ...formData, projects: [...formData.projects, projects] })
+            setProjects({
+                porjectName: [''],
+                porjectDescription: ''
+            })
+        }
+    }
+    const onProjectsDelete = (index:number): void => {
+            const filterProjects = formData.projects.filter((ele, i) => index !== i)
+            setFormData({ ...formData, projects: filterProjects })
+    }
     const onListChange = (e: any): void => {
         setLists({ ...lists, [e.target.name]: true })
     }
-    const onChipDelete = (ele:string, arrName:string):void => {
+    const onChipDelete = (ele: string, arrName: string): void => {
         switch (arrName) {
             case 'skills':
-                if(formData.skills.some(element => element === ele)){
+                if (formData.skills.some(element => element === ele)) {
                     const skills = formData.skills.filter(element => element !== ele)
                     setFormData({ ...formData, skills })
                 }
                 break;
             case 'languages':
-                if(formData.languages.some(element => element === ele)){
+                if (formData.languages.some(element => element === ele)) {
                     const languages = formData.languages.filter(element => element !== ele)
                     setFormData({ ...formData, languages })
                 }
                 break;
             case 'contacts':
-                if(formData.contacts.some(element => element === ele)){
+                if (formData.contacts.some(element => element === ele)) {
                     const contacts = formData.contacts.filter(element => element !== ele)
                     setFormData({ ...formData, contacts })
                 }
@@ -106,15 +130,26 @@ const Template_1 = () => {
                 setFormData({ ...formData })
                 break;
         }
-    }   
+    }
     const theme = useTheme()
     const matches = useMediaQuery(theme.breakpoints.up('md'))
     const useStyles = makeStyles({
         components: {
             border: '2px solid #000',
             height: '100%',
+            maxHeight: '90vh',
             padding: 10,
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            overflow: 'auto !important'
+        },
+        textArea: {
+            padding: '10px 14px',
+            boxSizing: 'border-box',
+            width: '100%',
+            maxWidth: '100%',
+            fontWeight: 400,
+            fontSize: '1rem',
+            borderRadius: 5
         }
     })
     const classes = useStyles()
@@ -135,32 +170,35 @@ const Template_1 = () => {
                             </Grid>
                             <Grid item xs={12} lg={5}>
                                 <TextareaAutosize
-                                    placeholder='bio'
-                                    style={{ width: '100%' }}
-                                    minRows={3}
+                                    className={classes.textArea}
+                                    placeholder='bio (max 180 characters)'
+                                    minRows={1.8}
                                     value={formData.bio}
                                     name='bio'
                                     onChange={(e) => onDataChange(e)}
+                                    maxLength={180}
                                 />
                             </Grid>
                             <Grid item xs={12} lg={6}>
                                 <TextareaAutosize
-                                    placeholder='education'
-                                    style={{ width: '100%' }}
-                                    minRows={3}
+                                    className={classes.textArea}
+                                    placeholder='education (max 130 characters)'
+                                    minRows={1.8}
                                     value={formData.education}
                                     name='education'
                                     onChange={(e) => onDataChange(e)}
+                                    maxLength={130}
                                 />
                             </Grid>
                             <Grid item xs={12} lg={6}>
                                 <TextareaAutosize
-                                    placeholder='experience'
-                                    style={{ width: '100%' }}
-                                    minRows={3}
+                                    className={classes.textArea}
+                                    placeholder='experience (max 130 characters)'
+                                    minRows={1.8}
                                     value={formData.experience}
                                     name='experience'
                                     onChange={(e) => onDataChange(e)}
+                                    maxLength={130}
                                 />
                             </Grid>
                             <Grid item xs={12} lg={4}>
@@ -175,13 +213,13 @@ const Template_1 = () => {
                                         add skills
                                     </Button>
                                     {
-                                        lists.skills && <TextField value={listData.skillsList} name='skillsList' onChange={(e)=> onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter skills' sx={{ margin: '10px 0' }} fullWidth size='small' />
+                                        lists.skills && <TextField value={listData.skillsList} name='skillsList' onChange={(e) => onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter skills' sx={{ margin: '10px 0' }} fullWidth size='small' />
                                     }
                                     {
-                                        formData.skills.length !== 0 && 
-                                        formData.skills.map((ele, index)=>{
+                                        formData.skills.length !== 0 &&
+                                        formData.skills.map((ele, index) => {
                                             return (
-                                                <Chip sx={{margin:'3px'}} color='success' key={index} label={ele} onDelete={()=>onChipDelete(ele, 'skills')}/>
+                                                <Chip sx={{ margin: '3px' }} color='success' key={index} label={ele} onDelete={() => onChipDelete(ele, 'skills')} />
                                             )
                                         })
                                     }
@@ -199,13 +237,13 @@ const Template_1 = () => {
                                         add languages
                                     </Button>
                                     {
-                                        lists.languages && <TextField value={listData.languagesList} name='languagesList' onChange={(e)=> onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter languages' sx={{ margin: '10px 0' }} fullWidth size='small' />
+                                        lists.languages && <TextField value={listData.languagesList} name='languagesList' onChange={(e) => onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter languages' sx={{ margin: '10px 0' }} fullWidth size='small' />
                                     }
                                     {
-                                        formData.languages.length !== 0 && 
-                                        formData.languages.map((ele, index)=>{
+                                        formData.languages.length !== 0 &&
+                                        formData.languages.map((ele, index) => {
                                             return (
-                                                <Chip sx={{margin:'3px'}} color='success' key={index} label={ele} onDelete={()=>onChipDelete(ele, 'languages')}/>
+                                                <Chip sx={{ margin: '3px' }} color='success' key={index} label={ele} onDelete={() => onChipDelete(ele, 'languages')} />
                                             )
                                         })
                                     }
@@ -223,13 +261,62 @@ const Template_1 = () => {
                                         add contacts
                                     </Button>
                                     {
-                                        lists.contacts && <TextField value={listData.contactsList} name='contactsList' onChange={(e)=> onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter contacts' sx={{ margin: '10px 0' }} fullWidth size='small' />
+                                        lists.contacts && <TextField value={listData.contactsList} name='contactsList' onChange={(e) => onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter contacts' sx={{ margin: '10px 0' }} fullWidth size='small' />
                                     }
                                     {
-                                        formData.contacts.length !== 0 && 
-                                        formData.contacts.map((ele, index)=>{
+                                        formData.contacts.length !== 0 &&
+                                        formData.contacts.map((ele, index) => {
                                             return (
-                                                <Chip sx={{margin:'3px'}} color='success' key={index} label={ele} onDelete={()=>onChipDelete(ele, 'contacts')}/>
+                                                <Chip sx={{ margin: '3px' }} color='success' key={index} label={ele} onDelete={() => onChipDelete(ele, 'contacts')} />
+                                            )
+                                        })
+                                    }
+                                </Box>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Box>
+                                    <Button
+                                        variant='outlined'
+                                        startIcon={<AddCircleOutlineIcon />}
+                                        size='medium'
+                                        onClick={(e) => onListChange(e)}
+                                        name='projects'
+                                    >
+                                        add projects
+                                    </Button>
+                                    {
+                                        lists.projects &&
+                                        <>
+                                            <Typography sx={{ marginTop: 1, fontSize: '1.4rem' }}>Maximum 4 projects can be taken</Typography>
+                                            <TextField value={projects.porjectName[0]} onChange={(e) => setProjects({ ...projects, porjectName: [e.target.value] })} label='Enter Project name' sx={{ margin: '10px 0' }} fullWidth size='small' />
+                                            <TextareaAutosize onChange={(e) => setProjects({ ...projects, porjectDescription: e.target.value })} value={projects.porjectDescription} className={classes.textArea} minRows={1.2} placeholder='Enter description (max 230 characters)' maxLength={230} />
+                                            <Button
+                                                variant='contained'
+                                                size='small'
+                                                color='success'
+                                                sx={{ marginTop: 1, marginBottom: 2 }}
+                                                onClick={onProjectsDataChange}
+                                            >
+                                                add
+                                            </Button>
+                                        </>
+                                    }
+                                    {
+                                        formData.projects.length !== 0 &&
+                                        formData.projects.map((ele, index) => {
+                                            return (
+                                                    <Card key={index} sx={{ backgroundColor: 'blue', margin: '10px 0', color:'#fff' }}>
+                                                    <CardHeader 
+                                                    sx={{ padding: '10px 16px' }} 
+                                                    title={ele.porjectName[0]}
+                                                    action={
+                                                        <IconButton onClick={()=>onProjectsDelete(index)} color='inherit'>
+                                                            <CloseIcon/>    
+                                                        </IconButton>
+                                                    } 
+                                                    />
+                                                    <CardContent>{ele.porjectDescription}</CardContent>
+                                                </Card>
                                             )
                                         })
                                     }
