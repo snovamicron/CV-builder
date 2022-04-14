@@ -136,6 +136,7 @@ const Template_1 = () => {
         }
     }
     const onAllDataSubmit = async ():Promise<void> => {
+        setShow(false)
         await send_template_1_data(formData)
         setShow(true)
     }

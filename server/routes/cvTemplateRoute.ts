@@ -42,7 +42,7 @@ router.get('/template_1',(req, res)=>{
     const doc = new PDFDocument({size: 'A4'})
     // Name section
     doc.font('Times-Roman')
-    doc.fontSize(60)
+    doc.fontSize(40)
     doc.text(temp_1.name,15,30)
 
     //Bio section
@@ -71,7 +71,7 @@ router.get('/template_1',(req, res)=>{
         })
         doc.fontSize(12)
         doc.fillColor('black').text(ele.porjectDescription,{
-            width:420,
+            width:380,
             align:'left',
         })
     })
