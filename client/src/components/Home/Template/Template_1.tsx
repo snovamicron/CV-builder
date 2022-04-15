@@ -13,7 +13,8 @@ import {
     CardHeader,
     CardContent,
     Typography,
-    IconButton
+    IconButton,
+    Badge
 } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CloseIcon from '@mui/icons-material/Close';
@@ -102,9 +103,9 @@ const Template_1 = () => {
             })
         }
     }
-    const onProjectsDelete = (index:number): void => {
-            const filterProjects = formData.projects.filter((ele, i) => index !== i)
-            setFormData({ ...formData, projects: filterProjects })
+    const onProjectsDelete = (index: number): void => {
+        const filterProjects = formData.projects.filter((ele, i) => index !== i)
+        setFormData({ ...formData, projects: filterProjects })
     }
     const onListChange = (e: any): void => {
         setLists({ ...lists, [e.target.name]: true })
@@ -135,7 +136,7 @@ const Template_1 = () => {
                 break;
         }
     }
-    const onAllDataSubmit = async ():Promise<void> => {
+    const onAllDataSubmit = async (): Promise<void> => {
         setShow(false)
         await send_template_1_data(formData)
         setShow(true)
@@ -159,196 +160,215 @@ const Template_1 = () => {
             fontWeight: 400,
             fontSize: '1rem',
             borderRadius: 5
+        },
+        submitButtonWraper: {
+            display: 'flex',
+            justifyContent: 'center'
         }
     })
     const classes = useStyles()
     return (
         <>
             <Grid container sx={{ height: '100%', padding: '10px 10px' }} columnSpacing={{ xs: 1 }} >
-                <Grid item xs={12} md={7} >
-                    <Box className={classes.components}>
-                        <Grid container spacing={{ xs: 2 }}>
-                            <Grid item xs={12} lg={7}>
-                                <TextField
-                                    fullWidth
-                                    label='name'
-                                    value={formData.name}
-                                    name='name'
-                                    onChange={(e) => onDataChange(e)}
-                                />
-                            </Grid>
-                            <Grid item xs={12} lg={5}>
-                                <TextareaAutosize
-                                    className={classes.textArea}
-                                    placeholder='bio (max 180 characters)'
-                                    minRows={1.8}
-                                    value={formData.bio}
-                                    name='bio'
-                                    onChange={(e) => onDataChange(e)}
-                                    maxLength={180}
-                                />
-                            </Grid>
-                            <Grid item xs={12} lg={6}>
-                                <TextareaAutosize
-                                    className={classes.textArea}
-                                    placeholder='education (max 130 characters)'
-                                    minRows={1.8}
-                                    value={formData.education}
-                                    name='education'
-                                    onChange={(e) => onDataChange(e)}
-                                    maxLength={130}
-                                />
-                            </Grid>
-                            <Grid item xs={12} lg={6}>
-                                <TextareaAutosize
-                                    className={classes.textArea}
-                                    placeholder='experience (max 130 characters)'
-                                    minRows={1.8}
-                                    value={formData.experience}
-                                    name='experience'
-                                    onChange={(e) => onDataChange(e)}
-                                    maxLength={130}
-                                />
-                            </Grid>
-                            <Grid item xs={12} lg={4}>
-                                <Box>
-                                    <Button
-                                        variant='outlined'
-                                        startIcon={<AddCircleOutlineIcon />}
-                                        size='medium'
-                                        onClick={(e) => onListChange(e)}
-                                        name='skills'
-                                    >
-                                        add skills
-                                    </Button>
-                                    {
-                                        lists.skills && <TextField value={listData.skillsList} name='skillsList' onChange={(e) => onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter skills' sx={{ margin: '10px 0' }} fullWidth size='small' />
-                                    }
-                                    {
-                                        formData.skills.length !== 0 &&
-                                        formData.skills.map((ele, index) => {
-                                            return (
-                                                <Chip sx={{ margin: '3px' }} color='success' key={index} label={ele} onDelete={() => onChipDelete(ele, 'skills')} />
-                                            )
-                                        })
-                                    }
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} lg={4}>
-                                <Box>
-                                    <Button
-                                        variant='outlined'
-                                        startIcon={<AddCircleOutlineIcon />}
-                                        size='medium'
-                                        onClick={(e) => onListChange(e)}
-                                        name='languages'
-                                    >
-                                        add languages
-                                    </Button>
-                                    {
-                                        lists.languages && <TextField value={listData.languagesList} name='languagesList' onChange={(e) => onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter languages' sx={{ margin: '10px 0' }} fullWidth size='small' />
-                                    }
-                                    {
-                                        formData.languages.length !== 0 &&
-                                        formData.languages.map((ele, index) => {
-                                            return (
-                                                <Chip sx={{ margin: '3px' }} color='success' key={index} label={ele} onDelete={() => onChipDelete(ele, 'languages')} />
-                                            )
-                                        })
-                                    }
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} lg={4}>
-                                <Box>
-                                    <Button
-                                        variant='outlined'
-                                        startIcon={<AddCircleOutlineIcon />}
-                                        size='medium'
-                                        onClick={(e) => onListChange(e)}
-                                        name='contacts'
-                                    >
-                                        add contacts
-                                    </Button>
-                                    {
-                                        lists.contacts && <TextField value={listData.contactsList} name='contactsList' onChange={(e) => onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter contacts' sx={{ margin: '10px 0' }} fullWidth size='small' />
-                                    }
-                                    {
-                                        formData.contacts.length !== 0 &&
-                                        formData.contacts.map((ele, index) => {
-                                            return (
-                                                <Chip sx={{ margin: '3px' }} color='success' key={index} label={ele} onDelete={() => onChipDelete(ele, 'contacts')} />
-                                            )
-                                        })
-                                    }
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Box>
-                                    <Button
-                                        variant='outlined'
-                                        startIcon={<AddCircleOutlineIcon />}
-                                        size='medium'
-                                        onClick={(e) => onListChange(e)}
-                                        name='projects'
-                                    >
-                                        add projects
-                                    </Button>
-                                    {
-                                        lists.projects &&
-                                        <>
-                                            <Typography sx={{ marginTop: 1, fontSize: '1.4rem' }}>Maximum 4 projects can be taken</Typography>
-                                            <TextField value={projects.porjectName[0]} onChange={(e) => setProjects({ ...projects, porjectName: [e.target.value] })} label='Enter Project name' sx={{ margin: '10px 0' }} fullWidth size='small' />
-                                            <TextareaAutosize onChange={(e) => setProjects({ ...projects, porjectDescription: e.target.value })} value={projects.porjectDescription} className={classes.textArea} minRows={1.2} placeholder='Enter description (max 230 characters)' maxLength={230} />
-                                            <Button
-                                                variant='contained'
-                                                size='small'
-                                                color='success'
-                                                sx={{ marginTop: 1, marginBottom: 2 }}
-                                                onClick={onProjectsDataChange}
-                                            >
-                                                add
-                                            </Button>
-                                        </>
-                                    }
-                                    {
-                                        formData.projects.length !== 0 &&
-                                        formData.projects.map((ele, index) => {
-                                            return (
-                                                    <Card key={index} sx={{ backgroundColor: 'blue', margin: '10px 0', color:'#fff' }}>
-                                                    <CardHeader 
-                                                    sx={{ padding: '10px 16px' }} 
-                                                    title={ele.porjectName[0]}
-                                                    action={
-                                                        <IconButton onClick={()=>onProjectsDelete(index)} color='inherit'>
-                                                            <CloseIcon/>    
-                                                        </IconButton>
-                                                    } 
-                                                    />
-                                                    <CardContent>{ele.porjectDescription}</CardContent>
-                                                </Card>
-                                            )
-                                        })
-                                    }
-                                </Box>
-                            </Grid>
-                        </Grid>
-                        <Button 
-                        variant='outlined'
-                        onClick={onAllDataSubmit}
-                        >
-                            submit
-                        </Button>
-                    </Box>
-                </Grid>
                 {
-                    matches &&
-                    <Grid item xs={12} md={5}>
+                    !show || matches ? <Grid item xs={12} md={7} >
                         <Box className={classes.components}>
-                            {
-                                show && <iframe style={{width:'100%', height:'100%'}} src='http://localhost:4000/cv/template_1'/>
-                            }
+                            <Grid container spacing={{ xs: 2 }}>
+                                <Grid item xs={12} lg={7}>
+                                    <TextField
+                                        fullWidth
+                                        label='name'
+                                        value={formData.name}
+                                        name='name'
+                                        onChange={(e) => onDataChange(e)}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} lg={5}>
+                                    <TextareaAutosize
+                                        className={classes.textArea}
+                                        placeholder='bio (max 180 characters)'
+                                        minRows={1.8}
+                                        value={formData.bio}
+                                        name='bio'
+                                        onChange={(e) => onDataChange(e)}
+                                        maxLength={180}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} lg={6}>
+                                    <TextareaAutosize
+                                        className={classes.textArea}
+                                        placeholder='education (max 130 characters)'
+                                        minRows={1.8}
+                                        value={formData.education}
+                                        name='education'
+                                        onChange={(e) => onDataChange(e)}
+                                        maxLength={130}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} lg={6}>
+                                    <TextareaAutosize
+                                        className={classes.textArea}
+                                        placeholder='experience (max 130 characters)'
+                                        minRows={1.8}
+                                        value={formData.experience}
+                                        name='experience'
+                                        onChange={(e) => onDataChange(e)}
+                                        maxLength={130}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} lg={4}>
+                                    <Box>
+                                        <Button
+                                            variant='outlined'
+                                            startIcon={<AddCircleOutlineIcon />}
+                                            size='medium'
+                                            onClick={(e) => onListChange(e)}
+                                            name='skills'
+                                        >
+                                            add skills
+                                        </Button>
+                                        {
+                                            lists.skills && <TextField value={listData.skillsList} name='skillsList' onChange={(e) => onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter skills' sx={{ margin: '10px 0' }} fullWidth size='small' />
+                                        }
+                                        {
+                                            formData.skills.length !== 0 &&
+                                            formData.skills.map((ele, index) => {
+                                                return (
+                                                    <Chip sx={{ margin: '3px' }} color='success' key={index} label={ele} onDelete={() => onChipDelete(ele, 'skills')} />
+                                                )
+                                            })
+                                        }
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12} lg={4}>
+                                    <Box>
+                                        <Button
+                                            variant='outlined'
+                                            startIcon={<AddCircleOutlineIcon />}
+                                            size='medium'
+                                            onClick={(e) => onListChange(e)}
+                                            name='languages'
+                                        >
+                                            add languages
+                                        </Button>
+                                        {
+                                            lists.languages && <TextField value={listData.languagesList} name='languagesList' onChange={(e) => onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter languages' sx={{ margin: '10px 0' }} fullWidth size='small' />
+                                        }
+                                        {
+                                            formData.languages.length !== 0 &&
+                                            formData.languages.map((ele, index) => {
+                                                return (
+                                                    <Chip sx={{ margin: '3px' }} color='success' key={index} label={ele} onDelete={() => onChipDelete(ele, 'languages')} />
+                                                )
+                                            })
+                                        }
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12} lg={4}>
+                                    <Box>
+                                        <Button
+                                            variant='outlined'
+                                            startIcon={<AddCircleOutlineIcon />}
+                                            size='medium'
+                                            onClick={(e) => onListChange(e)}
+                                            name='contacts'
+                                        >
+                                            add contacts
+                                        </Button>
+                                        {
+                                            lists.contacts && <TextField value={listData.contactsList} name='contactsList' onChange={(e) => onListTextChange(e)} onKeyUp={(e) => onListDataChange(e)} label='Enter contacts' sx={{ margin: '10px 0' }} fullWidth size='small' />
+                                        }
+                                        {
+                                            formData.contacts.length !== 0 &&
+                                            formData.contacts.map((ele, index) => {
+                                                return (
+                                                    <Chip sx={{ margin: '3px' }} color='success' key={index} label={ele} onDelete={() => onChipDelete(ele, 'contacts')} />
+                                                )
+                                            })
+                                        }
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Box>
+                                        <Button
+                                            variant='outlined'
+                                            startIcon={<AddCircleOutlineIcon />}
+                                            size='medium'
+                                            onClick={(e) => onListChange(e)}
+                                            name='projects'
+                                        >
+                                            add projects
+                                        </Button>
+                                        {
+                                            lists.projects &&
+                                            <>
+                                                <Typography sx={{ marginTop: 1, fontSize: '1.4rem' }}>Maximum 4 projects can be taken</Typography>
+                                                <TextField value={projects.porjectName[0]} onChange={(e) => setProjects({ ...projects, porjectName: [e.target.value] })} label='Enter Project name' sx={{ margin: '10px 0' }} fullWidth size='small' />
+                                                <TextareaAutosize onChange={(e) => setProjects({ ...projects, porjectDescription: e.target.value })} value={projects.porjectDescription} className={classes.textArea} minRows={1.2} placeholder='Enter description (max 230 characters)' maxLength={230} />
+                                                <Button
+                                                    variant='contained'
+                                                    size='small'
+                                                    color='success'
+                                                    sx={{ marginTop: 1, marginBottom: 2 }}
+                                                    onClick={onProjectsDataChange}
+                                                >
+                                                    add
+                                                </Button>
+                                            </>
+                                        }
+                                        {
+                                            formData.projects.length !== 0 &&
+                                            formData.projects.map((ele, index) => {
+                                                return (
+                                                    <Card key={index} sx={{ backgroundColor: 'blue', margin: '10px 0', color: '#fff' }}>
+                                                        <CardHeader
+                                                            sx={{ padding: '10px 16px' }}
+                                                            title={ele.porjectName[0]}
+                                                            action={
+                                                                <IconButton onClick={() => onProjectsDelete(index)} color='inherit'>
+                                                                    <CloseIcon />
+                                                                </IconButton>
+                                                            }
+                                                        />
+                                                        <CardContent>{ele.porjectDescription}</CardContent>
+                                                    </Card>
+                                                )
+                                            })
+                                        }
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Box className={classes.submitButtonWraper}>
+                                        <Button
+                                            variant='contained'
+                                            onClick={onAllDataSubmit}
+                                            size='large'
+                                            color='success'
+                                            sx={{ fontSize: '1.2rem' }}
+                                        >
+                                            submit
+                                        </Button>
+                                    </Box>
+                                </Grid>
+                            </Grid>
                         </Box>
-                    </Grid>
+                    </Grid> : null
+                }
+                {
+                    matches || show ?
+                        <Grid item xs={12} md={5}>
+                            <Box className={classes.components} sx={{ display: 'flex', flexDirection: 'column' }}>
+                                {
+                                    !matches &&
+                                    <IconButton sx={{ marginLeft: 'auto' }} onClick={()=>setShow(false)}>
+                                        <CloseIcon />
+                                    </IconButton>
+                                }
+                                {
+                                    show && <iframe style={{ width: '100%', height: '100%' }} src='http://localhost:4000/cv/template_1' />
+                                }
+                            </Box>
+                        </Grid> : null
                 }
             </Grid>
         </>
