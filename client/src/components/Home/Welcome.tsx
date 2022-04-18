@@ -1,12 +1,16 @@
+import { useNavigate } from 'react-router-dom'
+
 
 // MUI components
 import { Box, Button, Typography, useMediaQuery } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { useTheme } from '@mui/material/styles'
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 const Welcome = ()=>{
     const theme = useTheme()
+    const navigate = useNavigate()
     const mqa = useMediaQuery(theme.breakpoints.between('md','lg'))
     const mqb = useMediaQuery(theme.breakpoints.between('sm','md'))
     const mqc = useMediaQuery(theme.breakpoints.down('sm'))
@@ -46,7 +50,12 @@ const Welcome = ()=>{
         },
         container2:{
             height:'75vh',
-            backgroundColor:'#000'
+            backgroundColor:'#000',
+            display:'flex',
+            alignItems:'center',
+            justifyContent:'flex-end',
+            flexDirection:'column',
+            paddingBottom:80
         },
         dotContainer1:{
             height:'47vh',
@@ -58,7 +67,7 @@ const Welcome = ()=>{
             opacity:0.4
         },
         dotContainer2:{
-            height:'49vh',
+            height:'60vh',
             width:'32vw',
             position:'absolute',
             bottom:0,
@@ -88,6 +97,14 @@ const Welcome = ()=>{
             fontWeight:'600 !important',
             opacity:0.5,
             marginTop:'20px !important'
+        },
+        ss1:{
+            width:'78vw',
+            marginTop:110,
+            padding:15,
+            boxSizing:'border-box',
+            backgroundColor:'#fff',
+            borderRadius:20
         }
     })
     const classes = useStyles()
@@ -111,12 +128,21 @@ const Welcome = ()=>{
                 }}
                 variant='contained'
                 color='success'
+                onClick={()=>navigate('/template')}
                 >
                     Get Started
                 </Button>
+                <img src="ss1.png" alt="ss" className={classes.ss1} />
                 </Box>
             </Box>
-            <Box className={classes.container2} ></Box>
+            <Box className={classes.container2} >
+                <Box sx={{display:'flex'}}>
+                <Typography sx={{color:'#fff'}}>
+                    made by NOVA with
+                </Typography>
+                <Typography sx={{color:'#fff', marginLeft:1}}><FavoriteIcon/></Typography>
+                </Box>
+            </Box>
         </>
     )
 }
