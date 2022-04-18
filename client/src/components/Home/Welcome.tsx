@@ -20,42 +20,55 @@ const Welcome = ()=>{
                 return {
                     title1_fontSize: '3.8rem',
                     title2_fontSize: '1.3rem',
-                    button_fontSize: '2rem'
+                    button_fontSize: '2rem',
+                    container1_Height: '100vh',
+                    container2_Height: '60vh',
+                    ss1_position: 250
                 }
             case mqb:
                 return {
                     title1_fontSize: '3rem',
                     title2_fontSize: '1rem',
-                    button_fontSize: '1.5rem'
+                    button_fontSize: '1.5rem',
+                    container1_Height: '70vh',
+                    container2_Height: '40vh',
+                    ss1_position: 80
                 }
             case mqc:
                 return {
                     title1_fontSize: '2.4rem',
                     title2_fontSize: '1rem',
-                    button_fontSize: '1.5rem'
+                    button_fontSize: '1.5rem',
+                    container1_Height: '70vh',
+                    container2_Height: '40vh',
+                    ss1_position: 80
                 }
             default:
                 return {
                     title1_fontSize:'5rem',
                     title2_fontSize: '1.3rem',
-                    button_fontSize: '2rem'
+                    button_fontSize: '2rem',
+                    container1_Height: '100vh',
+                    container2_Height: '75vh',
+                    ss1_position: 200
                 }
         }
     }
     const useStyles = makeStyles({
         container1:{
-            height:'100vh',
+            height:mqStyle().container1_Height,
             backgroundColor:'#9cd9b7',
-            display:'flex'
+            display:'flex',
+            position:'relative'
         },
         container2:{
-            height:'75vh',
+            height:mqStyle().container2_Height,
             backgroundColor:'#000',
             display:'flex',
             alignItems:'center',
             justifyContent:'flex-end',
             flexDirection:'column',
-            paddingBottom:80
+            paddingBottom:80,
         },
         dotContainer1:{
             height:'47vh',
@@ -100,7 +113,8 @@ const Welcome = ()=>{
         },
         ss1:{
             width:'78vw',
-            marginTop:110,
+            position:'relative',
+            top:mqStyle().ss1_position,
             padding:15,
             boxSizing:'border-box',
             backgroundColor:'#fff',

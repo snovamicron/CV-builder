@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 
 // MUI components
 import { 
@@ -10,12 +11,14 @@ import {
 
 
 const Navbar = ()=>{
+    const navigate = useNavigate()
     const useStyles = makeStyles({
-        navbar:{
-            backgroundColor:'#4ec762 !important',
+        navBox:{
             display:'flex',
             alignItems:'center',
-            justifyContent:'center'
+            justifyContent:'center',
+            margin:'0 auto',
+            cursor:'pointer'
         },
         logo:{
             height:50
@@ -31,9 +34,11 @@ const Navbar = ()=>{
         <>
         <Box>
             <AppBar>
-                <Toolbar className={classes.navbar}>
-                    <img src="logo192.png" alt="logo" className={classes.logo} />
+                <Toolbar sx={{backgroundColor:'#4ec762 !important'}}>
+                       <Box className={classes.navBox} onClick={()=>navigate("/")} >
+                       <img src="logo192.png" alt="logo" className={classes.logo}/>
                     <Typography className={classes.logoTitle}>Rabbit</Typography>
+                       </Box>
                 </Toolbar>
             </AppBar>
         </Box>
