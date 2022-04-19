@@ -34,20 +34,3 @@ export class temp_1Obj {
 }
 
 
-// this is important information
-
-// export const temp_1Obj:temp_1ObjInterface = {
-//     name: 'soumyadeep mondal',
-//     bio:'should 180 char',
-//     experience:`should 130 char`,
-//     skills:[],
-//     languages:[],
-//     contacts:[],
-//     education:`should 130 char`,
-//     projects: [  
-//         {
-//             porjectName:['should 70 char'],
-//             porjectDescription:`should 230 char projects u should use only 4`
-//         }
-//     ]
-// }
