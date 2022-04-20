@@ -6,3 +6,24 @@
     languages:string[],
     contacts:string[],
     projects:porjectInterface[]
+
+
+
+        name,
+        Father_Name,
+        address,
+        contact_number,
+        email,
+        dob,
+        sex,
+        Marital_Status,
+        Nationality,
+        Career_Objective,
+        Educational_Qualification,
+        Work_Experience,
+        Languages_Known,
+        Technical_Skills,
+        Hobbies_Interest,
+        Declaration,
+        place,
+        date,

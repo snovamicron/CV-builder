@@ -3,6 +3,7 @@
 // components
 import Navbar from './Template/Navbar'
 import Template_1 from './Template/Template_1'
+import Template_2 from './Template/Template_2'
 
 // MUI components
 import { Box } from '@mui/material'
@@ -21,7 +22,8 @@ const classes = useStyles()
     <>
       <Navbar/>
       <Box className={classes.wraper}>
-        <Template_1/>
+        {/* <Template_1/> */}
+        <Template_2/>
       </Box>
     </>
   )
