@@ -4,7 +4,7 @@ import { temp_2Obj } from '../utils/templateObj'
 
 const router = express.Router()
 
-var temp_1 = new temp_2Obj(
+var temp_2 = new temp_2Obj(
     '','','','','',
     '','','','','',
     '','','','','',
@@ -31,25 +31,25 @@ router.post('/temp_2_data',(req, res)=>{
         place,
         date,
     } = req.body
-    temp_1 = new temp_2Obj(
+    temp_2 = new temp_2Obj(
         name,
-        address,
-        contact_number,
-        email,
-        Career_Objective,
-        Educational_Qualification,
-        Work_Experience,
-        dob,
-        Father_Name,
-        sex,
-        Marital_Status,
-        Languages_Known,
-        Technical_Skills,
-        Nationality,
-        Hobbies_Interest,
-        Declaration,
-        place,
-        date,
+    address,
+    contact_number,
+    email,
+    Career_Objective,
+    Educational_Qualification,
+    Work_Experience,
+    dob,
+    Father_Name,
+    sex,
+    Marital_Status,
+    Languages_Known,
+    Nationality,
+    Hobbies_Interest,
+    Declaration,
+    place,
+    date,
+    Technical_Skills
     )
     res.status(200).send('CV is ready')
   })
@@ -66,13 +66,13 @@ router.get('/template_2',(req, res)=>{
     doc.lineGap(1.5)
     doc.font('Times-Bold')
     doc.fontSize(15)
-    doc.text(temp_1.name, {
+    doc.text(temp_2.name, {
     })
     doc.font('Times-Roman')
     doc.fontSize(12)
-    doc.text(temp_1.address)
-    doc.text(`Mobile no: ${temp_1.contact_number}`)
-    doc.text(`Email id: ${temp_1.email}`)
+    doc.text(temp_2.address)
+    doc.text(`Mobile no: ${temp_2.contact_number}`)
+    doc.text(`Email id: ${temp_2.email}`)
     doc.moveTo(65, 130)
         .lineTo(570, 130)
         .lineWidth(2.5)
@@ -84,7 +84,7 @@ router.get('/template_2',(req, res)=>{
     })
     doc.moveDown(0.5)
     doc.font('Times-Roman')
-    doc.text(`${temp_1.Career_Objective}`,{
+    doc.text(`${temp_2.Career_Objective}`,{
         indent:35
     })
     doc.moveDown(1.5)
@@ -94,7 +94,7 @@ router.get('/template_2',(req, res)=>{
     })
     doc.moveDown(0.3)
     doc.font('Times-Roman')
-    doc.text(`${temp_1.Educational_Qualification}`,{
+    doc.text(`${temp_2.Educational_Qualification}`,{
         indent:35
     })
     doc.moveDown(3)
@@ -104,7 +104,7 @@ router.get('/template_2',(req, res)=>{
     })
     doc.moveDown(0.3)
     doc.font('Times-Roman')
-    doc.text(`${temp_1.Work_Experience}`,{
+    doc.text(`${temp_2.Work_Experience}`,{
         indent:35
     })
     doc.moveDown(3)
@@ -114,7 +114,7 @@ router.get('/template_2',(req, res)=>{
     })
     doc.moveDown(0.5)
     doc.font('Times-Roman')
-    doc.list(temp_1.Technical_Skills,{
+    doc.list(temp_2.Technical_Skills,{
         indent:35
     })
     doc.moveDown(2.5)
@@ -124,35 +124,35 @@ router.get('/template_2',(req, res)=>{
     })
     doc.moveDown(1.5)
     doc.font('Times-Roman')
-    doc.text('Name                           : '+ temp_1.name,{
+    doc.text('Name                           : '+ temp_2.name,{
         indent:35
     })
     doc.moveDown(0.3)
-    doc.text('Date of Birth               : '+ temp_1.dob,{
+    doc.text('Date of Birth               : '+ temp_2.dob,{
         indent:35
     })
     doc.moveDown(0.3)
-    doc.text('Father Name               : '+temp_1.Father_Name,{
+    doc.text('Father Name               : '+temp_2.Father_Name,{
         indent:35
     })
     doc.moveDown(0.3)
-    doc.text("Sex                              : "+temp_1.sex,{
+    doc.text("Sex                              : "+temp_2.sex,{
         indent:35
     })
     doc.moveDown(0.3)
-    doc.text(`Marital Status              : ${temp_1.Marital_Status}`,{
+    doc.text(`Marital Status              : ${temp_2.Marital_Status}`,{
         indent:35
     })
     doc.moveDown(0.3)
-    doc.text(`Languages Known      : ${temp_1.Languages_Known}`,{
+    doc.text(`Languages Known      : ${temp_2.Languages_Known}`,{
         indent:35   
     })
     doc.moveDown(0.3)
-    doc.text(`Nationality                  : ${temp_1.Nationality}`,{
+    doc.text(`Nationality                  : ${temp_2.Nationality}`,{
         indent:35
     })
     doc.moveDown(0.3)
-    doc.text(`Hobbies & Interest      : ${temp_1.Hobbies_Interest}`,{
+    doc.text(`Hobbies & Interest      : ${temp_2.Hobbies_Interest}`,{
         indent:35
     })
     doc.moveDown(3)
@@ -162,16 +162,16 @@ router.get('/template_2',(req, res)=>{
     })
     doc.moveDown(0.8)
     doc.font('Times-Roman')
-    doc.text(temp_1.Declaration,{
+    doc.text(temp_2.Declaration,{
         indent:35
     })
     doc.moveDown(1.5)
-    doc.text(`(${temp_1.name})`,{
+    doc.text(`(${temp_2.name})`,{
         indent:320
     })
     doc.moveUp()
-    doc.text(`Place: ${temp_1.place}`)
-    doc.text(`Date: ${temp_1.date}`)
+    doc.text(`Place: ${temp_2.place}`)
+    doc.text(`Date: ${temp_2.date}`)
     doc.end()
     doc.pipe(res)
 })

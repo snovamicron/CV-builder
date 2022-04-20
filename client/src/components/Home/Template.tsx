@@ -1,29 +1,25 @@
-
+import { 
+  useNavigate,
+  BrowserRouter as Router,
+  Routes,
+  Route
+ } from 'react-router-dom'
 
 // components
 import Navbar from './Template/Navbar'
-import Template_1 from './Template/Template_1'
-import Template_2 from './Template/Template_2'
 
 // MUI components
-import { Box } from '@mui/material'
-import { makeStyles } from '@mui/styles'
+import { Button, Box } from '@mui/material'
 
 
 const Template = () => {
-const useStyles = makeStyles({
-  wraper:{
-      height:'92vh',
-      marginTop:64
-  }
-})
-const classes = useStyles()
+  const navigate = useNavigate()
   return (
     <>
       <Navbar/>
-      <Box className={classes.wraper}>
-        {/* <Template_1/> */}
-        <Template_2/>
+      <Box sx={{marginTop:15}}>
+      <Button onClick={()=>navigate('/template_1')} color='success' size='large' variant='contained'>Template 1</Button>
+      <Button onClick={()=>navigate('/template_2')} color='success' size='large' variant='contained'>Template 2</Button>
       </Box>
     </>
   )

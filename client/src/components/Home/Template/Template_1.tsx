@@ -144,6 +144,10 @@ const Template_1 = () => {
     const theme = useTheme()
     const matches = useMediaQuery(theme.breakpoints.up('md'))
     const useStyles = makeStyles({
+        wraper:{
+            height:'92vh',
+            marginTop:64
+        },
         components: {
             border: '2px solid #000',
             height: '100%',
@@ -169,6 +173,7 @@ const Template_1 = () => {
     const classes = useStyles()
     return (
         <>
+        <Box className={classes.wraper}>
             <Grid container sx={{ height: '100%', padding: '10px 10px' }} columnSpacing={{ xs: 1 }} >
                 {
                     !show || matches ? <Grid item xs={12} md={7} >
@@ -371,6 +376,7 @@ const Template_1 = () => {
                         </Grid> : null
                 }
             </Grid>
+            </Box>
         </>
     )
 }
