@@ -55,6 +55,13 @@ const Template_2 = () => {
             '& > label': {
                 fontSize: matches?'1.5rem':'1rem'
             }
+        },
+        textArea:{
+            maxWidth:'100%',
+            width:'100%',
+            borderRadius:5,
+            padding:'20px 10px',
+            fontSize: matches?'1.5rem':'1rem'
         }
     })
     const classes = useStyles()
@@ -96,16 +103,24 @@ const Template_2 = () => {
         Declaration: '',
         place: '',
         date: '',
-        Technical_Skills:['']
+        Technical_Skills:[]
     })
-    const handleFormDataChange = (e:React.ChangeEvent<HTMLInputElement>):void=>{
-        setFormData({...formData, [e.target.name]:e.target.value})
+    const handleFormDataChange = (e:React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>):void=>{
+        if(e.target.name !== 'Technical_Skills'){
+            setFormData({...formData, [e.target.name]:e.target.value})
+        }
+    }
+    const handleTechnicalSkillsData = (e:any):void=>{
+        if(e.key === 'Enter'){
+            setFormData({...formData, Technical_Skills:[...formData.Technical_Skills, e.terget.value]})
+        }
     }
     return (
         <>
             <Grid container sx={{ height: '100%', padding: '10px 10px' }} columnSpacing={{ xs: 1 }} >
                 {
-                    !show || matches ? <Grid item xs={12} md={7} >
+                    !show || matches ?
+                     <Grid item xs={12} md={7} >
                         <Box className={classes.components}>
                             <Grid container spacing={{ xs: 1 }}>
                                 <Grid item xs={12} md={6}>
@@ -209,7 +224,7 @@ const Template_2 = () => {
                                         ))}
                                     </TextField>
                                 </Grid>
-                                <Grid item xs={12} md={6}>
+                                <Grid item xs={12}>
                                     <TextField 
                                     fullWidth 
                                     className={classes.options}
@@ -226,8 +241,50 @@ const Template_2 = () => {
                                         ))}
                                     </TextField>
                                 </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <TextField fullWidth className={classes.text} />
+                                <Grid item xs={12}>
+                                    <TextareaAutosize 
+                                    className={classes.textArea} 
+                                    name='Career_Objective'
+                                    onChange={(e:React.ChangeEvent<HTMLTextAreaElement>)=>handleFormDataChange(e)}
+                                    value={formData.Career_Objective}
+                                    placeholder='Enter your career objective'
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextareaAutosize 
+                                    className={classes.textArea} 
+                                    name='Educational_Qualification'
+                                    onChange={(e:React.ChangeEvent<HTMLTextAreaElement>)=>handleFormDataChange(e)}
+                                    value={formData.Educational_Qualification}
+                                    placeholder='Enter your educational qualification'
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextareaAutosize 
+                                    className={classes.textArea} 
+                                    name='Work_Experience'
+                                    onChange={(e:React.ChangeEvent<HTMLTextAreaElement>)=>handleFormDataChange(e)}
+                                    value={formData.Work_Experience}
+                                    placeholder='Enter your work experience'
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextareaAutosize 
+                                    className={classes.textArea} 
+                                    name='Languages_Known'
+                                    onChange={(e:React.ChangeEvent<HTMLTextAreaElement>)=>handleFormDataChange(e)}
+                                    value={formData.Languages_Known}
+                                    placeholder='Enter your known languages'
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                <TextField
+                                        fullWidth
+                                        className={classes.text}
+                                        name='Technical_Skills'
+                                        value={formData.Technical_Skills}
+                                        onKeyUp={(e)=>handleTechnicalSkillsData(e)}
+                                    />
                                 </Grid>
                             </Grid>
                         </Box>

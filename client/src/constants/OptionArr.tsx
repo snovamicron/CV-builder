@@ -1,6 +1,7 @@
 export const sexs:string[] = ['Male', 'Female', 'Others']
 export const maritalStatus:string[] = ['Single', 'Married', 'Divorcee', 'Widow']
-export const Nationalities:string[] = [ 'Afghan',
+export const Nationalities:string[] = [ 
+'Afghan',
 'Albanian',
 'Algerian',
 'American',
