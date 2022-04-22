@@ -14,14 +14,19 @@ import {
     InputLabel,
     MenuItem,
     Chip,
-    Button
+    Button,
+    InputAdornment,
 } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from '@mui/icons-material/Close'
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
 
 // API
 import { send_template_2_data } from '../../../services/allApi';
+
+// components
+import Navbar from './Navbar';
 
 
 const Template_2 = () => {
@@ -118,7 +123,7 @@ const Template_2 = () => {
         date: '',
         Technical_Skills: []
     })
-    const [skillsData, setSkillsData] = useState<String>('')
+    const [skillsData, setSkillsData] = useState<string>('')
     const handleFormDataChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>): void => {
         if (e.target.name !== 'Technical_Skills') {
             setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -132,6 +137,12 @@ const Template_2 = () => {
             setSkillsData('')
         }
     }
+    const handleTechnicalSkillsDataButton = (): void => {
+            let newSkills = formData.Technical_Skills
+            newSkills.push(skillsData)
+            setFormData({ ...formData, Technical_Skills: newSkills })
+            setSkillsData('')
+    }
     const onChipDisable = (e: number): void => {
         let newSkills = formData.Technical_Skills
         newSkills.splice(e, 1)
@@ -144,6 +155,7 @@ const Template_2 = () => {
     }
     return (
         <>
+            <Navbar/>
             <Box className={classes.wraper}>
                 <Grid container sx={{ height: '100%', padding: '10px 10px' }} columnSpacing={{ xs: 1 }} >
                     {
@@ -278,6 +290,15 @@ const Template_2 = () => {
                                                 value={skillsData}
                                                 onKeyUp={(e) => handleTechnicalSkillsData(e)}
                                                 label='Technical Skills'
+                                                InputProps={{
+                                                    endAdornment: (
+                                                      <InputAdornment position="end">
+                                                        <IconButton color='success' onClick={handleTechnicalSkillsDataButton}>
+                                                        <AddCircleIcon />
+                                                        </IconButton>
+                                                      </InputAdornment>
+                                                    ),
+                                                  }}
                                             />
                                             {
                                                 formData.Technical_Skills.length !== 0 &&

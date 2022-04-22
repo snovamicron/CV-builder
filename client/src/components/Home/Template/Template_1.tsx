@@ -13,8 +13,7 @@ import {
     CardHeader,
     CardContent,
     Typography,
-    IconButton,
-    Badge
+    IconButton
 } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,6 +22,9 @@ import { makeStyles } from '@mui/styles'
 
 // API
 import { send_template_1_data } from '../../../services/allApi';
+
+// components
+import Navbar from './Navbar'
 
 
 const Template_1 = () => {
@@ -173,6 +175,7 @@ const Template_1 = () => {
     const classes = useStyles()
     return (
         <>
+        <Navbar/>
         <Box className={classes.wraper}>
             <Grid container sx={{ height: '100%', padding: '10px 10px' }} columnSpacing={{ xs: 1 }} >
                 {
