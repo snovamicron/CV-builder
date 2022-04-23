@@ -25,6 +25,7 @@ import { send_template_1_data } from '../../../services/allApi';
 
 // components
 import Navbar from './Navbar'
+import PrevewBackground from './PrevewBackground';
 
 
 const Template_1 = () => {
@@ -373,7 +374,10 @@ const Template_1 = () => {
                                     </IconButton>
                                 }
                                 {
-                                    show && <iframe style={{ width: '100%', height: '100%' }} src='http://localhost:4000/cv/template_1' />
+                                    show && <iframe title='prevew1' style={{ width: '100%', height: '100%' }} src='http://localhost:4000/cv/template_1' />
+                                }
+                                {
+                                    !show && <PrevewBackground/>
                                 }
                             </Box>
                         </Grid> : null

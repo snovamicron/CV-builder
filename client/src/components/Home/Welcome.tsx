@@ -23,7 +23,8 @@ const Welcome = ()=>{
                     button_fontSize: '2rem',
                     container1_Height: '100vh',
                     container2_Height: '60vh',
-                    ss1_position: 250
+                    ss1_position: 250,
+                    tittleBoxPaddingTop:150
                 }
             case mqb:
                 return {
@@ -32,7 +33,8 @@ const Welcome = ()=>{
                     button_fontSize: '1.5rem',
                     container1_Height: '70vh',
                     container2_Height: '40vh',
-                    ss1_position: 80
+                    ss1_position: 40,
+                    tittleBoxPaddingTop:150
                 }
             case mqc:
                 return {
@@ -41,7 +43,8 @@ const Welcome = ()=>{
                     button_fontSize: '1.5rem',
                     container1_Height: '70vh',
                     container2_Height: '40vh',
-                    ss1_position: 80
+                    ss1_position: 40,
+                    tittleBoxPaddingTop:60
                 }
             default:
                 return {
@@ -50,7 +53,8 @@ const Welcome = ()=>{
                     button_fontSize: '2rem',
                     container1_Height: '100vh',
                     container2_Height: '75vh',
-                    ss1_position: 200
+                    ss1_position: 200,
+                    tittleBoxPaddingTop:150
                 }
         }
     }
@@ -68,7 +72,7 @@ const Welcome = ()=>{
             alignItems:'center',
             justifyContent:'flex-end',
             flexDirection:'column',
-            paddingBottom:80,
+            paddingBottom:30,
         },
         dotContainer1:{
             height:'47vh',
@@ -94,7 +98,7 @@ const Welcome = ()=>{
             alignItems:'center',
             flexDirection:'column',
             zIndex:10000,
-            paddingTop:190
+            paddingTop:mqStyle().tittleBoxPaddingTop
         },
         title1:{
             fontSize:`${mqStyle().title1_fontSize} !important`,
@@ -119,6 +123,21 @@ const Welcome = ()=>{
             boxSizing:'border-box',
             backgroundColor:'#fff',
             borderRadius:20
+        },
+        logo:{
+            height:'50px',
+            position:'absolute',
+            top:10,
+            left:20
+        },
+        logoTitle:{
+            fontSize:'1.5rem !important',
+            fontWeight:'600 !important',
+            position:'absolute',
+            top:20,
+            left:75,
+            color:'#fff',
+            textShadow:'1px 1px #000 !important'
         }
     })
     const classes = useStyles()
@@ -127,6 +146,8 @@ const Welcome = ()=>{
             <Box className={classes.container1} >
                 <Box className={classes.dotContainer1}/>
                 <Box className={classes.dotContainer2}/>
+                <img className={classes.logo} src="logo192.png" alt="logo" />
+                <Typography className={classes.logoTitle}>Rabbit</Typography>
                 <Box className={classes.tittleBox}>
                 <Typography className={classes.title1} >The fastest way to create a</Typography>
                 <Typography sx={{fontWeight:900, color:'#277a00'}} className={classes.title1} > CURRICULUM VITAE </Typography>

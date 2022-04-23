@@ -16,6 +16,7 @@ import {
     Chip,
     Button,
     InputAdornment,
+    Typography,
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -27,6 +28,7 @@ import { send_template_2_data } from '../../../services/allApi';
 
 // components
 import Navbar from './Navbar';
+import PrevewBackground from './PrevewBackground'
 
 
 const Template_2 = () => {
@@ -34,9 +36,9 @@ const Template_2 = () => {
     const theme = useTheme()
     const matches = useMediaQuery(theme.breakpoints.up('md'))
     const useStyles = makeStyles({
-        wraper:{
-            height:'92vh',
-            marginTop:64
+        wraper: {
+            height: '92vh',
+            marginTop: 64
         },
         components: {
             border: '2px solid #000',
@@ -138,10 +140,10 @@ const Template_2 = () => {
         }
     }
     const handleTechnicalSkillsDataButton = (): void => {
-            let newSkills = formData.Technical_Skills
-            newSkills.push(skillsData)
-            setFormData({ ...formData, Technical_Skills: newSkills })
-            setSkillsData('')
+        let newSkills = formData.Technical_Skills
+        newSkills.push(skillsData)
+        setFormData({ ...formData, Technical_Skills: newSkills })
+        setSkillsData('')
     }
     const onChipDisable = (e: number): void => {
         let newSkills = formData.Technical_Skills
@@ -155,7 +157,7 @@ const Template_2 = () => {
     }
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <Box className={classes.wraper}>
                 <Grid container sx={{ height: '100%', padding: '10px 10px' }} columnSpacing={{ xs: 1 }} >
                     {
@@ -292,27 +294,34 @@ const Template_2 = () => {
                                                 label='Technical Skills'
                                                 InputProps={{
                                                     endAdornment: (
-                                                      <InputAdornment position="end">
-                                                        <IconButton color='success' onClick={handleTechnicalSkillsDataButton}>
-                                                        <AddCircleIcon />
-                                                        </IconButton>
-                                                      </InputAdornment>
+                                                        <InputAdornment position="end">
+                                                            <IconButton color='success' onClick={handleTechnicalSkillsDataButton}>
+                                                                <AddCircleIcon />
+                                                            </IconButton>
+                                                        </InputAdornment>
                                                     ),
-                                                  }}
+                                                }}
                                             />
                                             {
-                                                formData.Technical_Skills.length !== 0 &&
-                                                formData.Technical_Skills.map((ele, index) => {
-                                                    return (
-                                                        <Chip
-                                                            key={index}
-                                                            label={ele}
-                                                            className={classes.skillsChip}
-                                                            onDelete={() => onChipDisable(index)}
-                                                            color='success'
-                                                        />
-                                                    )
-                                                })
+                                                formData.Technical_Skills.length !== 0 ?
+                                                    formData.Technical_Skills.map((ele, index) => {
+                                                        return (
+                                                            <Chip
+                                                                key={index}
+                                                                label={ele}
+                                                                className={classes.skillsChip}
+                                                                onDelete={() => onChipDisable(index)}
+                                                                color='success'
+                                                            />
+                                                        )
+                                                    }) :
+                                                    <Typography
+                                                        sx={{
+                                                            marginTop: 0.5,
+                                                            marginLeft: 0.5,
+                                                            fontWeight: 600
+                                                        }}
+                                                    >Technical Skills 0</Typography>
                                             }
                                         </Grid>
                                         <Grid item xs={12}>
@@ -417,7 +426,10 @@ const Template_2 = () => {
                                         </IconButton>
                                     }
                                     {
-                                        show && <iframe style={{ width: '100%', height: '100%' }} src='http://localhost:4000/cv/template_2' />
+                                        show && <iframe title='prevew2' style={{ width: '100%', height: '100%' }} src='http://localhost:4000/cv/template_2' />
+                                    }
+                                    {
+                                        !show && <PrevewBackground />
                                     }
                                 </Box>
                             </Grid> : null

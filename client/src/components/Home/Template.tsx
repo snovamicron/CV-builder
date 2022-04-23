@@ -25,7 +25,8 @@ const Template = () => {
     templateImage: {
       border: '2px solid #000',
       marginBottom: 15,
-      width:matches ? '55%' : '100%'
+      width:matches ? '55%' : '100%',
+      cursor:'pointer'
     },
     templateBox: {
       display:'flex',
@@ -43,7 +44,7 @@ const Template = () => {
         <Grid container>
           <Grid item xs={12} md={6} >
             <Box className={classes.templateBox}>
-              <img className={classes.templateImage} src="template_1.png" alt="template_1" />
+              <img className={classes.templateImage} onClick={() => navigate('/template_1')} src="template_1.png" alt="template_1" />
               <Button
                 className={classes.template}
                 onClick={() => navigate('/template_1')}
@@ -57,7 +58,7 @@ const Template = () => {
           </Grid>
           <Grid item xs={12} md={6} >
             <Box className={classes.templateBox}>
-              <img className={classes.templateImage} src="template_2.png" alt="template_2" />
+              <img className={classes.templateImage} onClick={() => navigate('/template_2')} src="template_2.png" alt="template_2" />
               <Button
                 className={classes.template}
                 onClick={() => navigate('/template_2')}
